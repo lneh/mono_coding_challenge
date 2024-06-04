@@ -35,38 +35,30 @@ def create_tables(cursor):
 
 # Insert data into the 'users' and 'weddings' tables from the provided CSV files.
 def insert_data(cursor, user_csv, weddings_csv):
-    try:
-        # Insert data into 'users' table
-        with open(user_csv) as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                cursor.execute("""
-                    INSERT INTO users (user_id, user_name) VALUES (?, ?)
+    # Insert data into 'users' table
+    with open(user_csv) as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            cursor.execute("""
+                INSERT INTO users (user_id, user_name) VALUES (?, ?)
                 """, (row['user_id'], row['user_name']))
-    except Exception as e:
-        print(f"Error inserting data into users table: {e}")
 
-    try:
-        # Insert data into 'weddings' table
-        with open(weddings_csv) as file:
-            reader = csv.DictReader(file)
-            for row in reader:
-                cursor.execute("""
-                    INSERT INTO weddings (user_id, wedding_date) VALUES (?, ?)
+    # Insert data into 'weddings' table
+    with open(weddings_csv) as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            cursor.execute("""
+                INSERT INTO weddings (user_id, wedding_date) VALUES (?, ?)
                 """, (row['user_id'], row['wedding_date']))
-    except Exception as e:
-        print(f"Error inserting data into weddings table: {e}")
+
 
 # Write the query result into a CSV file.
 def write_in_file(filename, fieldnames, result):
-    try:
-        with open(filename, 'w', newline='') as file:
-            writer = csv.DictWriter(file, fieldnames)
-            writer.writeheader()
-            for row in result:
-                writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1]})
-    except Exception as e:
-        print(f"Error writing to file {filename}: {e}")
+    with open(filename, 'w') as file:
+        writer = csv.DictWriter(file, fieldnames)
+        writer.writeheader()
+        for row in result:
+            writer.writerow({fieldnames[0]: row[0], fieldnames[1]: row[1]})
 
 # Query for weddings happening in June 2024 and write the results to a CSV file.
 def query_weddings_06_2024(cursor):

@@ -2,8 +2,8 @@ import unittest
 import sqlite3
 import csv
 import os
-from src.Main import create_tables, insert_data, query_weddings_06_2024, query_weddings_two_weeks
 
+from src.Main import create_tables, insert_data, query_weddings_06_2024, query_weddings_two_weeks
 
 class MyTestCase(unittest.TestCase):
     @staticmethod

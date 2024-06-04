@@ -15,3 +15,14 @@ All the information is provided in the CSV attached. you can fork this repo to s
 - save the output in the file
 - your code should be testable on any platform (windows/linux/macos)
 - commit message/ readme/ unit test is also part of the test.
+
+## Run Project
+
+```bash
+python3 src/Main.py
+```
+You can find the results of both requests in the data folder  after executing the command
+## Run Tests
+```bash
+python3 -m unittest test.Test
+```
